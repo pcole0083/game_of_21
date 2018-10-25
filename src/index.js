@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+//below imports are not 3rd party modules
 import App from "./components/App";
 import store from "./stores";
 //import registerServiceWorker from "./registerServiceWorker";
 
-import "bootstrap/dist/css/bootstrap.min.css";
+//load the initial/global stylesheet
 import "./styles.css";
 
 const rootElement = document.getElementById("root");

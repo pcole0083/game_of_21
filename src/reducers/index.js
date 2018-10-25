@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-
-import buttons from "../reducers/buttons";
-
-export default combineReducers({ buttons });
+//import all the reduceers we have created
+import gamedata from "./gamedata";
+//combine the imported reducers
+export default combineReducers({ gamedata });

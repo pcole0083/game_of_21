@@ -1,4 +1,11 @@
-/* global fetch */
+/* global fetch */ //eslint
+/**
+ * Transport - wrapper for browser fetch API
+ * methods:
+ *  get - fetch a URL with type GET. Optionally can set data (body) and custom params.
+ *  set - fetch a URL with type POST, data (body) is required and custom params are optional.
+ *  __c - create a custom fetch request if you want to use other types such as PUT and DELETE.
+ */
 const transport = (function() {
   const _f = type => {
     if (!type) {

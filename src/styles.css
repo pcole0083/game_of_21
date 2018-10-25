@@ -1,7 +1,25 @@
-@import "bootstrap/dist/css/bootstrap.min.css";
+/**
+ * CSS Variables Here
+ */
+/* end CSS variables */
+/* bootstrap style shame */
+.text-center {
+  text-align: center !important;
+}
+.text-left {
+  text-align: left !important;
+}
+.text-right {
+  text-align: right !important;
+}
+/* end shame */
 .App {
   font-family: sans-serif;
   text-align: center;
+}
+.nav-wrapper .brand-logo {
+  text-transform: uppercase;
+  margin: 10px 0;
 }
 .btn-large .deck {
   transform: skew(0deg, -20deg) scale(1.4, 1.4);
@@ -9,3 +27,158 @@
 .btn-large .draw {
   transform: scaleY(1.4);
 }
+/**
+ * Hand Interface CSS
+ *  - includes card because .card is also a class in Materialize and we want to override some of it
+ */
+.hand {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-column-gap: 1%;
+  margin: 0 auto;
+  height: 45vh;
+  perspective: 600px;
+  max-width: 768px;
+}
+.hand .card {
+  border: 10px ridge rgb(117, 8, 8);
+  border-radius: 8%/4%; /*difffert sides of the curve (example top/left)*/
+  position: relative;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.hand .card .suit > svg {
+  transform: scale(2);
+}
+
+.hand .card.flipped {
+  cursor: default;
+  transform: rotateY(180deg);
+}
+
+.hand .card.flipped .front {
+  transform: rotateY(-180deg);
+}
+
+.hand .card .face {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  display: grid;
+  place-items: center center;
+  margin: 0;
+  backface-visibility: hidden;
+}
+
+.hand .card .front {
+  background-color: lightgrey;
+  transform: rotateY(180deg);
+}
+
+.hand .card .back {
+  background-color: darkred;
+  background-image: radial-gradient(
+      circle closest-side,
+      darkred 61%,
+      transparent 62%
+    ),
+    radial-gradient(
+      circle closest-side,
+      transparent 85%,
+      rgba(255, 255, 255, 1) 86%,
+      rgba(255, 255, 255, 1) 99%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle closest-side,
+      transparent 85%,
+      rgba(255, 255, 255, 1) 86%,
+      rgba(255, 255, 255, 1) 99%,
+      transparent 100%
+    );
+  background-size: 10px 10px, 10px 5px, 5px 10px;
+  background-position: 0px 0px;
+}
+
+.hand .card .face .top-left {
+  font-weight: 700;
+  left: 5%;
+  position: relative;
+  text-align: left;
+  top: -10%;
+  width: 100%;
+}
+.hand .card .face .bottom-right {
+  font-weight: 700;
+  position: relative;
+  right: -84%;
+  text-align: right;
+  top: 9%;
+  transform: rotateZ(-180deg);
+  width: 100%;
+}
+/* end Hand block */
+
+/**
+ * Modal Styles
+ * - adjustsments to library
+ * - The Materialize node package seems like it might be missing some styles
+ * - or maybe an old version?
+ */
+.modal .modal-content {
+  display: grid;
+  height: 100%;
+  place-items: center center;
+}
+/* end modal */
+
+/* Small screen specific styles */
+@media only screen and (max-width: 769px) {
+  /*overriding inline styles from JS */
+  .fixed-action-btn ul {
+    visibility: visible !important;
+  }
+  .fixed-action-btn ul li a {
+    /*overriding inline styles from JS */
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+}
+/* Medium and up screen sizes */
+@media only screen and (min-width: 770px) {
+  .hand .card:first-child {
+    transform: rotateZ(-4deg);
+  }
+  .hand .card:nth-child(2) {
+    transform: rotateZ(-3deg) translateX(-15%);
+  }
+  .hand .card:nth-child(3) {
+    transform: translateY(-0.8%) translateX(-30%);
+  }
+  .hand .card:nth-child(4) {
+    transform: rotateZ(3deg) translateX(-45%);
+  }
+  .hand .card:nth-child(5) {
+    transform: rotateZ(4deg) translateX(-60%);
+  }
+
+  .hand .card.flipped:first-child {
+    transform: rotateY(180deg) rotateZ(4deg);
+  }
+  .hand .card.flipped:nth-child(2) {
+    transform: rotateY(180deg) rotateZ(3deg) translateX(15%);
+  }
+  .hand .card.flipped:nth-child(3) {
+    transform: rotateY(180deg) translateY(-0.8%) translateX(30%);
+  }
+  .hand .card.flipped:nth-child(4) {
+    transform: rotateY(180deg) rotateZ(-3deg) translateX(45%);
+  }
+  .hand .card.flipped:nth-child(5) {
+    transform: rotateY(180deg) rotateZ(-4deg) translateX(60%);
+  }
+}
+/* end */
